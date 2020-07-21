@@ -5,7 +5,7 @@ const User = require('../models/user');
 
 // authentication using passport
 passport.use(new LocalStrategy({
-    usernameField: 'email'
+    usernameField: 'email',
 },
   function(email, password, done) {
       // find an user and establish the identity
@@ -69,4 +69,4 @@ passport.setAuthenticatedUser = function(req, res, next){
 
 
 
-  module.exports = passport;
+module.exports = passport;

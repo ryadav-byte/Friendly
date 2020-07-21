@@ -10,8 +10,15 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo')(session);
-
-app.use(cookieParser());
+const sassMiddleware = require('node-sass-middleware');
+app.use(sassMiddleware({
+    /* Options */
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: true,
+    outputStyle: 'extended',
+    prefix:  '/css'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+}));
 
 // calling body-parser to handle the Request Object from POST requests
 const bodyParser = require('body-parser');
@@ -19,7 +26,10 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 // combines the 2 above, then you can parse incoming Request Object if object, with nested objects, or generally any type.
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('assets'));
+
+app.use(cookieParser());
+
+app.use(express.static('./assets'));
 app.use(expressLayouts);
 
 

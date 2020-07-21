@@ -1,4 +1,7 @@
-body{
-    margin: 0;
-    background-color: red;
-}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  body #layout-main {
+    height: 100%;
+    overflow: auto;
+    background-color: white; }
