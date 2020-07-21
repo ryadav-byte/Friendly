@@ -1,14 +1,51 @@
 footer{
     display: flex;
     background-color:  #003f67;
-    justify-content: space-around;
+    justify-content: space-between;
     color: white;
 
-    h3{
-        font-weight: 500;
-        a{
-            text-decoration: none;
-            color: white;
+    div{
+        margin-left: 3rem;
+        margin-right: 3rem;
+        p{
+            font-weight: 500;
+            a{
+                text-decoration: none;
+                color: white;
+            }
         }
+
+        nav{
+            ul{
+               
+                li{
+                    list-style: none;
+                   
+                    a{
+                        text-decoration: none;
+                        color: white;
+                    }
+                    
+                }
+            }
+        }
+
+        ul{
+               
+            li{
+                list-style: none;
+               
+                a{
+                    text-decoration: none;
+                    color: white;
+                }
+                
+            }
+        }
+
+        
     }
+
+   
+
 }
