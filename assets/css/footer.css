@@ -1,23 +1,24 @@
-footer {
+#layout-footer {
   display: flex;
   background-color: #003f67;
   justify-content: space-between;
-  color: white; }
-  footer div {
+  color: white;
+  font-family: "Source Sans Pro", sans-serif; }
+  #layout-footer div {
     margin-left: 3rem;
     margin-right: 3rem; }
-    footer div p {
+    #layout-footer div p {
       font-weight: 500; }
-      footer div p a {
+      #layout-footer div p a {
         text-decoration: none;
         color: white; }
-    footer div nav ul li {
+    #layout-footer div nav ul li {
       list-style: none; }
-      footer div nav ul li a {
+      #layout-footer div nav ul li a {
         text-decoration: none;
         color: white; }
-    footer div ul li {
+    #layout-footer div ul li {
       list-style: none; }
-      footer div ul li a {
+      #layout-footer div ul li a {
         text-decoration: none;
         color: white; }

@@ -1,2 +1,179 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<h1>This is home page!</h1>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+        
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/home.css">
+
+
+<div id="home">
+    <section id="home-profile">
+        <div id="left-aside-wrapper">
+            <aside id="left-aside">
+                <div id="profile-card">
+                    <div id="background"></div>
+                    <div id="profile-info">
+                        <img
+                            src="/images/me.jpg"
+                            alt="Profile picture"
+                        />
+                        <strong id="profile-name">
+                            <%= user.name%>
+                        </strong
+                        >
+                        <small>Full Stack Developer</small>
+                    </div>
+                </div>
+                
+            </aside>
+        </div>
+        
+    </section>
+
+    <section id="feed-posts">
+        <div id="main-wrapper">
+            <main id="main-section">
+                <div class="card gedf-card">
+                
+                    <form action="/posts/create" id="new-post-form" method="POST">
+                        <div class="card-body">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                    <div class="form-group">
+                                        <textarea name="content" class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                                    </div>
+    
+                                </div>
+                            </div>
+                            <div class="btn-toolbar justify-content-between">
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-primary" style="background-color: #0091ca;">Share</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button style="color:#0091ca;" id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1" style="color:#0091ca;">
+                                        <a style="color:#0091ca;" class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                                        <a style="color:#0091ca;" class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                                        <a style="color:#0091ca;" class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div id="feed-sort">
+                    <hr />
+                    <button>
+                        <span>Sort by:</span>
+                        <strong>Top</strong>
+                        <span class="fas fa-sort-down"></span>
+                    </button>
+                </div>
+                <% for(post of posts){ %>
+                <article>
+                    <div id="post-author">
+                        <a href="#">
+                            <div>
+                                <img
+                                    src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
+                                    alt="Image"
+                                />
+                                <div>
+                                    <div>
+                                        <strong id="post-author-name">
+                                            <%= post.user.name %>
+                                        </strong
+                                        >
+                                        <span>
+                                            <span>&nbsp;·&nbsp;</span>
+                                            1st</span
+                                        >
+                                    </div>
+                                    <span> Software Engineer</span
+                                    >
+                                    <span>12h</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div>
+                            <span class="fas fa-circle"></span>
+                            <span class="fas fa-circle"></span>
+                            <span class="fas fa-circle"></span>
+                        </div>
+                    </div>
+                    <div id="post-data">
+                        <p>
+                           <%= post.content %>
+                        </p>
+                    </div>
+                    <div id="post-interactions">
+                        <div id="interactions-amount">
+                            <span
+                                id="like-icon"
+                                class="fas fa-thumbs-up fa-flip-horizontal"
+                            ></span>
+                           
+                            <span id="amount-info"
+                                >23 <span>&nbsp;·&nbsp;</span> 4
+                                Comments</span
+                            >
+                        </div>
+                        <div id="interactions-btns">
+                            <button>
+                                <a style="color: black;" href="#collapseExample" role="button" >
+                                    <span
+                                    class="far fa-thumbs-up fa-flip-horizontal"
+                                ></span>
+                                <span>Like</span>
+                                </a>
+                            </button>
+                            <button>
+                                <a style="color: black;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <span
+                                    class="far fa-comment-dots fa-flip-horizontal"
+                                ></span>
+                                <span>Comment</span>
+                                </a>
+                                
+                            </button>
+                        </div>
+                    </div>
+                    <p>
+
+                      </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                      </div>
+                </article>
+                <% } %>
+            </main>
+        </div>
+
+    </section>
+
+    <section id="all-users">
+        <p>User 1</p>
+        <p>User 2</p>
+        <p>User 3</p>
+    </section>
+</div>
+
+
+
+

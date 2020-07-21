@@ -1,0 +1,15 @@
+#home{
+    display: flex;
+    #home-profile{
+        width: 20%;
+    }
+
+    #feed-posts{
+        width: 60%;
+    }
+    #all-users{
+        padding-left: 1rem;
+        padding-top: 1rem;
+        width: 15%;
+    }
+}

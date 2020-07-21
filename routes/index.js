@@ -5,6 +5,7 @@ const passport = require('passport');
 
 router.get('/',passport.checkAuthentication, homeController.home);
 router.use('/users', require('./users'));
+router.use('/posts', require('./posts'));
 
 
 //for any further routes, access from here
