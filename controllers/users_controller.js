@@ -38,14 +38,14 @@ module.exports.create = function(req, res){
 
     User.findOne({email: req.email}, function(err, user){
         if(err){
-            console.log('error in finding a user while signing up');
+            console.log('error in finding a user while signing up', err);
             return;
         }
 
         if(!user){
             User.create(req.body, function(err, user){
                 if(err){
-                    console.log('Error in creating user while signing up');
+                    console.log('Error in creating user while signing up', err);
                     return;
                 }
                 return res.redirect('/users/sign-in');

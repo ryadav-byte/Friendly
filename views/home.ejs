@@ -50,7 +50,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                     <div class="form-group">
-                                        <textarea name="content" class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                                        <textarea name="content" class="form-control" id="message" rows="3" placeholder="What are you thinking?" required></textarea>
                                     </div>
     
                                 </div>
@@ -78,8 +78,8 @@
                 <div id="feed-sort">
                     <hr />
                     <button>
-                        <span>Sort by:</span>
-                        <strong>Top</strong>
+                        <!-- <span>Sort by:</span> -->
+                        <span>Feed</span>
                         <span class="fas fa-sort-down"></span>
                     </button>
                 </div>
@@ -109,10 +109,15 @@
                                 </div>
                             </div>
                         </a>
+                        <!-- <div>
+                            <span class="fas fa-circle"></span>
+                            <span class="fas fa-circle"></span>
+                            <span class="fas fa-circle"></span>
+                        </div> -->
                         <div>
-                            <span class="fas fa-circle"></span>
-                            <span class="fas fa-circle"></span>
-                            <span class="fas fa-circle"></span>
+                            <% if(locals.user && post.user.id == locals.user.id){%>
+                            <a href="/posts/destroy/<%= post.id %>"><i class="fas fa-trash"></i></a>
+                            <%}%>
                         </div>
                     </div>
                     <div id="post-data">
@@ -134,7 +139,7 @@
                         </div>
                         <div id="interactions-btns">
                             <button>
-                                <a style="color: black;" href="#collapseExample" role="button" >
+                                <a style="color: black;" href="#collapseExample<%= post._id%>" role="button" >
                                     <span
                                     class="far fa-thumbs-up fa-flip-horizontal"
                                 ></span>
@@ -142,7 +147,7 @@
                                 </a>
                             </button>
                             <button>
-                                <a style="color: black;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <a style="color: black;" data-toggle="collapse" href="#collapseExample<%= post._id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     <span
                                     class="far fa-comment-dots fa-flip-horizontal"
                                 ></span>
@@ -155,10 +160,65 @@
                     <p>
 
                       </p>
-                      <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                        </div>
+                      <div class="collapse" id="collapseExample<%= post._id%>">
+                        <form class="form-row" action="comments/create" method="POST">
+                            <div class=" mx-sm-3 mb-2 col-10">
+                              
+                              <input type="text" name="content" class="form-control" placeholder="Write a comment here..." required>
+                              <input type="hidden" name="post" value="<%= post._id%>">
+                            </div>
+                            <button style="background-color:#0091ca;" type="submit" class="btn btn-primary mb-2">Comment</button>
+                        </form>
+
+                        
+                            
+                            <div class="rounded-0 card card-body .bg-secondary" style=" border: none;">
+                                <!-- <article> -->
+                                    <% for(comment of post.comments ){ %>
+                                    <div id="single-comment" style="border: 1px solid slategrey;  border-radius:0px 25px 25px 25px;;
+                                    background: slategrey;
+                                    padding: 20px; margin: 1em;" class="">
+                                    <div id="post-author" > 
+                                        <a href="#">
+                                            <div>
+                                                <!-- <img
+                                                    src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
+                                                    alt="Image"
+                                                /> -->
+                                                <div>
+                                                    <div>
+                                                        <strong id="post-author-name">
+                                                            <%= comment.user.name %>
+                                                        </strong
+                                                        >
+                                                        <!-- <span>
+                                                            <span>&nbsp;·&nbsp;</span>
+                                                            1st</span
+                                                        > -->
+                                                    </div>
+                                                    <span> Software Engineer</span
+                                                    >
+                                                    <span></span>
+                                                </div>
+                                                
+                                            </div>
+                                            <div>
+                                                <% if(locals.user && comment.user.id == locals.user.id){%>
+                                                <a href="/comments/destroy/<%= comment.id %>"><i class="fas fa-trash"></i></a>
+                                                <%}%>
+                                            </div>
+                                        </a>
+                                       
+                                    </div> 
+                                <!-- </article> -->
+                                <div style="padding: 14px 14px 0;">
+                                    <%= comment.content%>
+                                </div>
+                                
+                            </div>
+                                <%}%>
+                            </div>
+                       
                       </div>
                 </article>
                 <% } %>
