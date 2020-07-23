@@ -9,12 +9,15 @@ module.exports.create = async function(req, res){
             content: req.body.content,
             user: req.user._id
         });
+
+        req.flash('success', 'Post Published!');
     
         return res.redirect('back');
     }
     catch(err){
+        req.flash('error', 'Error in Publishing Post');
         console.log('Error in post_controller create action', err);
-        return;
+        return res.redirect('back');
     }
 }
 
@@ -26,15 +29,18 @@ module.exports.destroy = async function(req, res){
             post.remove();
 
             await Comment.deleteMany({post: req.params.id});
+            req.flash('success', 'Post Deleted!');
             return res.redirect('back');
         }
         else{
+            req.flash('error', 'You can not delete this post');
             return res.redirect('back');
         }      
         
     }
     catch(err){
+        req.flash('error', 'Error in Deleting Post');
         console.log('Error in posts_controller destroy action', err);
-        return;
+        return res.redirect('back');
     }
 }

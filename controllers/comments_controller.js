@@ -15,17 +15,18 @@ module.exports.create = async function(req, res){
     
             post.comments.push(comment);
             post.save();
-            res.redirect('/');
+            req.flash('success', 'Comment Published!');
+            return res.redirect('/');
             
         }
     }
     catch(err){
+        req.flash('error', 'Error in Publishing Comment');
         console.log('Error in comments_controller create function', err);
-        return;
+        return res.redirect('/');
     }
 
 }
-
 
 module.exports.destroy = async function(req, res){
 
@@ -37,6 +38,7 @@ module.exports.destroy = async function(req, res){
             comment.remove();
 
             let post = await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}})
+            req.flash('success', 'Comment Deleted!');
             return res.redirect('back');
         }
         else{
@@ -45,7 +47,7 @@ module.exports.destroy = async function(req, res){
     }
     catch(err){
         console.log('Error in comments_controller create action', err);
-        return;
-    }
-        
+        req.flash('error', 'Error in Deleting Comment!');
+        return res.redirect('back');
+    }       
 }
