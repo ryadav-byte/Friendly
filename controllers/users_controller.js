@@ -3,10 +3,30 @@ const User = require('../models/user');
 
 // render the profile page
 module.exports.profile = function(req, res){
-    return res.render('user_profile', {
-        title: 'Profile'
-    });
+    
+    User.findById(req.params.id, function(err, user){
+        if(err){
+            console.log('Error in finding user in users_controller');
+            return;
+        }
+        return res.render('user_profile', {
+            title: 'Profile',
+            profile_user: user
+        });
+
+    })
+    
 };
+
+module.exports.update = function(req, res){
+    User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+        if(err){
+            console.log('Error in update function');
+            return;
+        }
+        return res.redirect('back');
+    })
+}
 
 
 // render the signIn page

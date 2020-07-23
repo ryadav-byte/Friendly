@@ -84,143 +84,9 @@
                     </button>
                 </div>
                 <% for(post of posts){ %>
-                <article>
-                    <div id="post-author">
-                        <a href="#">
-                            <div>
-                                <img
-                                    src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
-                                    alt="Image"
-                                />
-                                <div>
-                                    <div>
-                                        <strong id="post-author-name">
-                                            <%= post.user.name %>
-                                        </strong
-                                        >
-                                        <span>
-                                            <span>&nbsp;·&nbsp;</span>
-                                            1st</span
-                                        >
-                                    </div>
-                                    <span> Software Engineer</span
-                                    >
-                                    <span>12h</span>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- <div>
-                            <span class="fas fa-circle"></span>
-                            <span class="fas fa-circle"></span>
-                            <span class="fas fa-circle"></span>
-                        </div> -->
-                        <div>
-                            <% if(locals.user && post.user.id == locals.user.id){%>
-                            <a href="/posts/destroy/<%= post.id %>"><i class="fas fa-trash"></i></a>
-                            <%}%>
-                        </div>
-                    </div>
-                    <div id="post-data">
-                        <p>
-                           <%= post.content %>
-                        </p>
-                    </div>
-                    <div id="post-interactions">
-                        <div id="interactions-amount">
-                            <span
-                                id="like-icon"
-                                class="fas fa-thumbs-up fa-flip-horizontal"
-                            ></span>
-                           
-                            <span id="amount-info"
-                                >23 <span>&nbsp;·&nbsp;</span> 4
-                                Comments</span
-                            >
-                        </div>
-                        <div id="interactions-btns">
-                            <button>
-                                <a style="color: black;" href="#collapseExample<%= post._id%>" role="button" >
-                                    <span
-                                    class="far fa-thumbs-up fa-flip-horizontal"
-                                ></span>
-                                <span>Like</span>
-                                </a>
-                            </button>
-                            <button>
-                                <a style="color: black;" data-toggle="collapse" href="#collapseExample<%= post._id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    <span
-                                    class="far fa-comment-dots fa-flip-horizontal"
-                                ></span>
-                                <span>Comment</span>
-                                </a>
-                                
-                            </button>
-                        </div>
-                    </div>
-                    <p>
 
-                      </p>
-                      <div class="collapse" id="collapseExample<%= post._id%>">
-                        <form class="form-row" action="comments/create" method="POST">
-                            <div class=" mx-sm-3 mb-2 col-10">
-                              
-                              <input type="text" name="content" class="form-control" placeholder="Write a comment here..." required>
-                              <input type="hidden" name="post" value="<%= post._id%>">
-                            </div>
-                            <button style="background-color:#0091ca;" type="submit" class="btn btn-primary mb-2">Comment</button>
-                        </form>
-
-                        
-                            
-                            <div class="rounded-0 card card-body .bg-secondary" style=" border: none;">
-                                <!-- <article> -->
-                                    <% for(comment of post.comments ){ %>
-                                    <div id="single-comment" style="border: 1px solid slategrey;  border-radius:0px 25px 25px 25px;;
-                                    background: slategrey;
-                                    padding: 20px; margin: 1em;" class="">
-                                    <div id="post-author" > 
-                                        <a href="#">
-                                            <div>
-                                                <!-- <img
-                                                    src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
-                                                    alt="Image"
-                                                /> -->
-                                                <div>
-                                                    <div>
-                                                        <strong id="post-author-name">
-                                                            <%= comment.user.name %>
-                                                        </strong
-                                                        >
-                                                        <!-- <span>
-                                                            <span>&nbsp;·&nbsp;</span>
-                                                            1st</span
-                                                        > -->
-                                                    </div>
-                                                    <span> Software Engineer</span
-                                                    >
-                                                    <span></span>
-                                                </div>
-                                                
-                                            </div>
-                                            <div>
-                                                <% if(locals.user && comment.user.id == locals.user.id){%>
-                                                <a href="/comments/destroy/<%= comment.id %>"><i class="fas fa-trash"></i></a>
-                                                <%}%>
-                                            </div>
-                                        </a>
-                                       
-                                    </div> 
-                                <!-- </article> -->
-                                <div style="padding: 14px 14px 0;">
-                                    <%= comment.content%>
-                                </div>
-                                
-                            </div>
-                                <%}%>
-                            </div>
-                       
-                      </div>
-                </article>
+                    <%- include('_post') -%>
+                    
                 <% } %>
             </main>
         </div>
@@ -228,9 +94,12 @@
     </section>
 
     <section id="all-users">
-        <p>User 1</p>
-        <p>User 2</p>
-        <p>User 3</p>
+        
+       <h5> User List</h5>
+           
+        <% for(u of all_users){ %>
+        <p><a href="users/profile/<%= u.id%>"><%= u.name %></a></p>
+        <% } %>
     </section>
 </div>
 
