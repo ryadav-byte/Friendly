@@ -74,8 +74,9 @@
     <p>
 
       </p>
+      <!-- <section class="post-comments"> -->
         <div class="collapse" id="collapseExample<%= post._id%>">
-        <form class="form-row" action="comments/create" method="POST">
+        <form id="post-<%= post._id %>-comments-form" class="form-row" action="comments/create" method="POST">
             <div class=" mx-sm-3 mb-2 col-10">
               
               <input type="text" name="content" class="form-control" placeholder="Write a comment here..." required>
@@ -86,9 +87,10 @@
 
         
             
-            <div class="rounded-0 card card-body .bg-secondary" style=" border: none;">
+            <div id="post-comments-<%= post._id %>" class="post-comments rounded-0 card card-body .bg-secondary" style=" border: none;">
                 <!-- <article> -->
                     <% for(comment of post.comments ){ %>
+                    <section id="comment-<%= comment._id %>">
                     <div id="single-comment" style="border: 1px solid slategrey;  border-radius:0px 25px 25px 25px;;
                     background: slategrey;
                     padding: 20px; margin: 1em;" class="">
@@ -118,7 +120,7 @@
                             </div>
                             <div>
                                 <% if(locals.user && comment.user.id == locals.user.id){%>
-                                <a href="/comments/destroy/<%= comment.id %>"><i class="fas fa-trash"></i></a>
+                                <a class="delete-comment-button" href="/comments/destroy/<%= comment._id %>"><i class="fas fa-trash"></i></a>
                                 <%}%>
                             </div>
                         </a>
@@ -130,8 +132,10 @@
                 </div>
                 
             </div>
+            </section>
                 <%}%>
             </div>
        
       </div>
+    <!-- </section> -->
 </article>

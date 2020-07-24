@@ -75,11 +75,13 @@
                 </div>
 
                 <div id="posts-list-container">
-                    <% for(post of posts){ %>
+                 
+                        <% for(post of posts){ %>
 
-                        <%- include('_post') -%>
-                        
-                    <% } %>
+                            <%- include('_post') -%>
+                            
+                        <% } %>
+                    
                 </div>
                
             </main>
@@ -96,7 +98,9 @@
         <% } %>
     </section>
 </div>
-<script src="/js/home_posts.js"></script>
 
+<!-- importing this script for creating the comments -->
+<script src="/js/home_post_comments.js" ></script>
+<script src="/js/home_posts.js"></script>
 
 
