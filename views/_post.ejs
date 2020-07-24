@@ -1,4 +1,4 @@
-<article>
+<article id="post-<%= post._id %>">
     <div id="post-author">
         <a href="#">
             <div>
@@ -30,7 +30,7 @@
         </div> -->
         <div>
             <% if(locals.user && post.user.id == locals.user.id){%>
-            <a href="/posts/destroy/<%= post.id %>"><i class="fas fa-trash"></i></a>
+            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="fas fa-trash"></i></a>
             <%}%>
         </div>
     </div>
