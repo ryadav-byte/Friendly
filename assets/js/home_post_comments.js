@@ -36,6 +36,9 @@ class PostComments{
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
 
+                     // enable the functionality of the toggle like button on the new comment
+                     new ToggleLike($(' .toggle-like-button', newComment));
+
                     new Noty({
                         theme: 'relax',
                         text: "Comment published!",
@@ -64,10 +67,6 @@ class PostComments{
         <div id="post-author" > 
             <a href="#">
                 <div>
-                    <!-- <img
-                        src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
-                        alt="Image"
-                    /> -->
                     <div>
                         <div>
                             <strong id="post-author-name">
@@ -88,12 +87,11 @@ class PostComments{
                 <div>
                     
                     <a class="delete-comment-button" href="/comments/destroy/${comment._id}"><i class="fas fa-trash"></i></a>
-                   
+                    
                 </div>
             </a>
            
         </div> 
-    <!-- </article> -->
     <div style="padding: 14px 14px 0;">
     ${comment.content}
     </div>

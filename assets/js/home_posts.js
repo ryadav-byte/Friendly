@@ -18,6 +18,9 @@
                     // call the create comment class
                     new PostComments(data.data.post._id);
 
+                     // enable the functionality of the toggle like button on the new post
+                     new ToggleLike($(' .toggle-like-button', newPost));
+
                     new Noty({
                         theme: 'relax',
                         text: "Post published!",
@@ -53,7 +56,7 @@
                             >
                             <span>
                                 <span>&nbsp;·&nbsp;</span>
-                                1st</span
+                                New</span
                             >
                         </div>
                         <span> Software Engineer</span
@@ -71,6 +74,7 @@
                 
                 <a class="delete-post-button" href="/posts/destroy/${post._id}"><i class="fas fa-trash"></i></a>
                 
+                
             </div>
         </div>
         <div id="post-data">
@@ -79,25 +83,17 @@
             </p>
         </div>
         <div id="post-interactions">
-            <div id="interactions-amount">
-                <span
-                    id="like-icon"
-                    class="fas fa-thumbs-up fa-flip-horizontal"
-                ></span>
-               
-                <span id="amount-info"
-                    >23 <span>&nbsp;·&nbsp;</span> 4
-                    Comments</span
-                >
-            </div>
+            
             <div id="interactions-btns">
                 <button>
-                    <a style="color: black;" href="#collapseExample${post._id}" role="button" >
-                        <span
-                        class="far fa-thumbs-up fa-flip-horizontal"
-                    ></span>
-                    <span>Like</span>
-                    </a>
+                <a style="color: black;" href="#collapseExample${post._id}" role="button" >
+               
+                <span>
+                <a class="toggle-like-button" data-likes="${post.likes.length}" href="/likes/toggle/?id=${post._id}&type=Post">
+                    <span class="far fa-thumbs-up fa-flip-horizontal"></span>  ${post.likes.length} Likes
+                </a>
+                </span>
+                </a>
                 </button>
                 <button>
                     <a style="color: black;" data-toggle="collapse" href="#collapseExample${post._id}" role="button" aria-expanded="false" aria-controls="collapseExample">

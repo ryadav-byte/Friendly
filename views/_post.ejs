@@ -14,7 +14,7 @@
                         >
                         <span>
                             <span>&nbsp;·&nbsp;</span>
-                            1st</span
+                            New</span
                         >
                     </div>
                     <span> Software Engineer</span
@@ -41,23 +41,22 @@
     </div>
     <div id="post-interactions">
         <div id="interactions-amount">
-            <span
+            <!-- <span
                 id="like-icon"
                 class="fas fa-thumbs-up fa-flip-horizontal"
             ></span>
            
-            <span id="amount-info"
-                >23 <span>&nbsp;·&nbsp;</span> 4
-                Comments</span
-            >
+            <span id="amount-info" class="toggle-like-button" data-likes="<%= post.likes.length %>"><%= post.likes.length %> <span>&nbsp;·&nbsp;</span><%= post.comments.length %> Comments</span> -->
         </div>
         <div id="interactions-btns">
             <button>
                 <a style="color: black;" href="#collapseExample<%= post._id%>" role="button" >
-                    <span
-                    class="far fa-thumbs-up fa-flip-horizontal"
-                ></span>
-                <span>Like</span>
+               
+                <span>
+                <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
+                    <span class="far fa-thumbs-up fa-flip-horizontal"></span>  <%= post.likes.length %> Likes
+                </a>
+                </span>
                 </a>
             </button>
             <button>
@@ -75,7 +74,89 @@
 
       </p>
       <!-- <section class="post-comments"> -->
+
         <div class="collapse" id="collapseExample<%= post._id%>">
+            <form id="post-<%= post._id %>-comments-form" class="form-row" action="comments/create" method="POST">
+                <div class=" mx-sm-3 mb-2 col-10">
+                  
+                  <input type="text" name="content" class="form-control" placeholder="Write a comment here..." required>
+                  <input type="hidden" name="post" value="<%= post._id%>">
+                </div>
+                <button style="background-color:#0091ca;" type="submit" class="btn btn-primary mb-2">Comment</button>
+            </form>
+    
+            
+                
+                <div id="post-comments-<%= post._id %>" class="post-comments rounded-0 card card-body .bg-secondary" style=" border: none;">
+                    <!-- <article> -->
+                        <% for(comment of post.comments ){ %>
+                        <section id="comment-<%= comment._id %>">
+                        <div id="single-comment" style="border: 1px solid slategrey;  border-radius:0px 25px 25px 25px;;
+                        background: slategrey;
+                        padding: 20px; margin: 1em;" class="">
+                        <div id="post-author" > 
+                            <a href="#">
+                                <div>
+                                    <!-- <img
+                                        src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
+                                        alt="Image"
+                                    /> -->
+                                    <div>
+                                        <div>
+                                            <strong id="post-author-name">
+                                                <%= comment.user.name %>
+                                            </strong
+                                            >
+                                            <!-- <span>
+                                                <span>&nbsp;·&nbsp;</span>
+                                                1st</span
+                                            > -->
+                                        </div>
+                                        <span> Software Engineer</span
+                                        >
+                                        <span></span>
+                                    </div>
+                                    
+                                </div>
+                                <div>
+                                    <% if(locals.user && comment.user.id == locals.user.id){%>
+                                    <a class="delete-comment-button" href="/comments/destroy/<%= comment._id %>"><i class="fas fa-trash"></i></a>
+                                    <%}%>
+                                </div>
+                            </a>
+                           
+                        </div> 
+                    <!-- </article> -->
+                    <div style="padding: 14px 14px 0;">
+                        <%= comment.content%>
+                    </div>
+                    
+                </div>
+                </section>
+                    <%}%>
+                </div>
+           
+          </div>
+        <!-- </section> -->
+    </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <div class="collapse" id="collapseExample<%= post._id%>">
         <form id="post-<%= post._id %>-comments-form" class="form-row" action="comments/create" method="POST">
             <div class=" mx-sm-3 mb-2 col-10">
               
@@ -83,36 +164,33 @@
               <input type="hidden" name="post" value="<%= post._id%>">
             </div>
             <button style="background-color:#0091ca;" type="submit" class="btn btn-primary mb-2">Comment</button>
-        </form>
+        </form> -->
 
         
             
-            <div id="post-comments-<%= post._id %>" class="post-comments rounded-0 card card-body .bg-secondary" style=" border: none;">
-                <!-- <article> -->
-                    <% for(comment of post.comments ){ %>
-                    <section id="comment-<%= comment._id %>">
+            <!-- <div id="post-comments-<%= post._id %>" class="post-comments rounded-0 card card-body .bg-secondary" style=" border: none;">
+                <article>
+                    <% for(comment of post.comments ){ %> -->
+                    <!-- <section id="comment-<%= comment._id %>">
                     <div id="single-comment" style="border: 1px solid slategrey;  border-radius:0px 25px 25px 25px;;
                     background: slategrey;
                     padding: 20px; margin: 1em;" class="">
                     <div id="post-author" > 
                         <a href="#">
                             <div>
-                                <!-- <img
-                                    src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
-                                    alt="Image"
-                                /> -->
+            
                                 <div>
                                     <div>
                                         <strong id="post-author-name">
                                             <%= comment.user.name %>
                                         </strong
                                         >
-                                        <!-- <span>
+                                         <span>
                                             <span>&nbsp;·&nbsp;</span>
                                             1st</span
-                                        > -->
+                                        
                                     </div>
-                                    <span> Software Engineer</span
+                                    <span> Software Engineer </span
                                     >
                                     <span></span>
                                 </div>
@@ -126,16 +204,60 @@
                         </a>
                        
                     </div> 
-                <!-- </article> -->
-                <div style="padding: 14px 14px 0;">
+                </article>
+             <div style="padding: 14px 14px 0;">
                     <%= comment.content%>
                 </div>
                 
             </div>
-            </section>
+            </section>  -->
+
+
+
+
+            <!-- <section id="comment-<%= comment._id %>">
+                <div id="single-comment" style="border: 1px solid slategrey;  border-radius:0px 25px 25px 25px;;
+                background: slategrey;
+                padding: 20px; margin: 1em;" class="">
+                <div id="post-author" > 
+                    <a href="#">
+                        <div>
+                            <div>
+                                <div>
+                                    <strong id="post-author-name">
+                                    <%= comment.user._id %>
+                                    <%= comment.user.name %>
+                                    </strong
+                                    > -->
+                                    <!-- <span>
+                                        <span>&nbsp;·&nbsp;</span>
+                                        1st</span
+                                    > -->
+                                <!-- </div>
+                                <span> Software Engineer</span
+                                >
+                                <span></span>
+                            </div>
+                            
+                        </div>
+                        <div>
+                             -->
+                            <!-- <a class="delete-comment-button" href="/comments/destroy/<%=comment._id %>"><i class="fas fa-trash"></i></a>
+                            
+                        </div>
+                    </a>
+                   
+                </div> 
+            <div style="padding: 14px 14px 0;">
+
+            <%= comment.content %>
+            </div>
+            
+        </div>
+        </section>
                 <%}%>
             </div>
        
-      </div>
+      </div> -->
     <!-- </section> -->
-</article>
+<!-- </article> -->
