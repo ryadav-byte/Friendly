@@ -475,6 +475,10 @@ span.fa-share-square {
   main#main-section div#feed-sort button {
     margin-right: 10px; } }
 
+@media only screen and (max-width: 950px) {
+  #home-profile {
+    display: none; } }
+
 /***************************************************************************
     GLOBAL CLASSES
 /**************************************************************************/
