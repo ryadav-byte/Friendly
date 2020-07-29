@@ -604,7 +604,22 @@ main#main-section
     #home-profile{
         display: none;
     }
+
+    #user-chat-box{
+        width: 35%;
+    }
 }
+
+@media only screen and (max-height: 500px){
+    #home-profile{
+        display: none;
+    }
+
+    #user-chat-box{
+        height: 0;
+    }
+}
+
 
 /***************************************************************************
     GLOBAL CLASSES

@@ -2,6 +2,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/chat_box.css">
 <link rel="stylesheet" href="/css/common.css">
 <link rel="stylesheet" href="/css/home.css">
 
@@ -108,5 +109,11 @@
         let toggleLike = new ToggleLike(self);
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
 
-
+<% if (locals.user){ %>
+    <script>
+        new ChatEngine('user-chat-box', '<%= locals.user.name %>')
+    </script>
+<% } %>

@@ -477,7 +477,15 @@ span.fa-share-square {
 
 @media only screen and (max-width: 950px) {
   #home-profile {
-    display: none; } }
+    display: none; }
+  #user-chat-box {
+    width: 35%; } }
+
+@media only screen and (max-height: 500px) {
+  #home-profile {
+    display: none; }
+  #user-chat-box {
+    height: 0; } }
 
 /***************************************************************************
     GLOBAL CLASSES

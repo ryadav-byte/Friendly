@@ -3,10 +3,10 @@
 #user-chat-box{
     position: fixed;
     bottom: 10px;
-    right: 10px;
+    right: 18px;
     border: 1px dashed solid grey;
     height: 350px;
-	width: 300px;
+	width: 19%;
 	background: white;
 	padding: 5px;
 	box-shadow: 1px 1px 1px 1px lightgrey;
@@ -24,7 +24,7 @@
 		    span{
 		    	display: inline-block;
 	    		padding: 15px;
-		    	background-color: #ffa0a0;
+		    	background-color: #c5bcec;
 		    }
 		    
 	    }
@@ -37,7 +37,7 @@
 		    	 
 	    		display: inline-block;
 	    		padding: 15px;
-    			background-color: #a0dcff;
+    			background-color: #0091ca;
 		    }
 		   
 	    }
