@@ -78,13 +78,21 @@
 
     </section>
 
-    <section id="all-users">
-        
-       <h5> User List</h5>
+    <section id="right-side">
+
+        <div id="all-users">
+            <h5> User List</h5>
            
-        <% for(u of all_users){ %>
-        <p><a href="users/profile/<%= u.id%>"><%= u.name %></a></p>
-        <% } %>
+            <% for(u of all_users){ %>
+            <p><a href="users/profile/<%= u.id%>"><%= u.name %></a></p>
+            <% } %>
+        </div>
+
+        <div id="chatbox">
+            <%- include('_chat_box') -%>
+        </div>
+        
+
     </section>
 </div>
 
