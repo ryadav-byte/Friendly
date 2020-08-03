@@ -1,0 +1,98 @@
+<!-- CHANGE: This file is to render dashboard -->
+<link rel="stylesheet" href="/css/dashboard.css">
+
+<h1 id="header">
+    Admin Dashboard
+</h1>
+
+ <!-- loop over all the user to show the relevant information on the dashboard -->
+<% for(user of all_users){ %>
+
+    <!-- finding out if atleast one post is not hidden -->
+    <% let AllPostsHidden = true %>
+    <% for(post of user.posts){%>
+        <% if(post.isHidden == false){%>
+            <%AllPostsHidden = false %>
+        <%}%>
+    <%}%>
+
+ <!-- user should have atleast one post whose property isHidden is false, then only it will be shown in dashboard -->
+    <% if(user.role == 'user' && AllPostsHidden == false){%>
+        <div id="single-user">
+            
+            <% let likeLength = 0 %>
+            <% let commentLength = 0 %>
+            <% let mostLikedPost = user.posts[0] %>
+            <% let mostCommentedPost = user.posts[0] %>
+            <% for(post of user.posts){%>
+
+                <% if(likeLength <= post.likes.length && post.isHidden == false){%>
+                    <% likeLength = post.likes.length%>
+                    <% mostLikedPost = post%>
+                <%}%>
+
+                <% if(commentLength <= post.comments.length && post.isHidden == false){%>
+                    <% commentLength = post.comments.length%>
+                    <% mostCommentedPost = post%>
+                <%}%>
+
+            <%}%>
+            <% likeLength = 0 %>
+            <% commentLength = 0 %>
+
+            <div id="user-detail">
+                
+                <img src="<%= user.avatar %>" alt="<%= user.name %>">
+                <h3><%= user.name%></h3>
+            </div>
+
+            <div id="post-details" >
+                <h3>Most Liked Post</h3>
+                <p>
+                <strong>Content: </strong>   <%= mostLikedPost.content%>
+                </p>
+                <p>
+                    <strong>Total Likes: </strong>  &nbsp; <%= mostLikedPost.likes.length%>
+                
+                </p>
+                <p>
+                    <strong>Created At: </strong>  &nbsp;  <%= mostLikedPost.createdAt%>
+                </p>
+                <p>
+                    <strong>Post Id: </strong>  &nbsp;  <%= mostLikedPost._id%>
+                </p>
+            </div>
+
+            <div id="post-details">
+                <h3>Most Commented Post</h3>
+                <p>
+                <strong>Content: </strong>   <%= mostCommentedPost.content%>
+                </p>
+                <p>
+                    <strong>Total Comments: </strong>  &nbsp; <%= mostCommentedPost.comments.length%>
+                
+                </p>
+                <p>
+                    <strong>Created At: </strong>  &nbsp;  <%= mostCommentedPost.createdAt%>
+                </p>
+                <p>
+                    <strong>Post Id: </strong>  &nbsp;  <%= mostCommentedPost._id%>
+                </p>
+            </div>
+
+        </div>
+
+    <% } %>
+
+<% } %>
+
+
+
+
+
+
+
+
+
+
+

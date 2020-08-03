@@ -1,0 +1,56 @@
+// CHANGE: This is to style dashboard page
+
+#header{
+    text-align: center;
+}
+#single-user{
+    height: auto;
+    width: 70%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 80px;
+    background-color: rgb(219, 232, 236);
+    border: 6px solid #003f67;
+    border-top: 20px solid #003f67;
+    
+
+    #user-detail{
+        margin-bottom: 30px;
+        margin-top: 20px; 
+        
+
+        img{
+            height: 8rem;
+            width: 8rem;
+            margin: auto;
+            border-radius: 50%;
+            border: 5px solid #0091ca;
+            box-shadow: 1px 1px 10px 2px rgb(149, 195, 216);
+        }
+        h3{
+            margin: auto;
+            text-align: center;
+        }
+
+    }
+
+    #post-details{
+        
+        background-color: #0091ca;
+        border-top: 1px solid #003f67;
+        width: 100%;
+        h3{
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+        }
+        p{
+            padding-left: 20px;
+        }
+
+    }
+}
+

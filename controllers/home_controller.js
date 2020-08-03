@@ -5,7 +5,6 @@ module.exports.home = async function(req, res){
 
     try{
         // populate the user of each post
-
         let posts = await Post.find({})
         .sort('-createdAt')
         .populate('user')
@@ -14,7 +13,7 @@ module.exports.home = async function(req, res){
             populate: {
                 path: 'user'
             }
-        });
+      })
 
         let users = await User.find({});
 
@@ -30,4 +29,36 @@ module.exports.home = async function(req, res){
         return;
     }
                         
+}
+
+
+// CHANGE: This is the action to render dashboard
+module.exports.dashboard = async function(req, res){
+    try{
+        // populate the posts of each user
+        let users = await User.find({})
+        .sort('-createdAt')
+        .populate({
+            path: 'posts',
+            populate:{
+                path: 'comments'
+            },
+            populate:{
+                path: 'user'
+            },
+            populate:{
+                path: 'likes'
+            }
+        });
+
+        return res.render('../views/dashboard', {
+            title: 'Dashboard | Admin',
+            all_users: users, 
+        });
+    
+    }
+    catch(err){
+        console.log('Error in dashboard action', err);
+        return;
+    }
 }

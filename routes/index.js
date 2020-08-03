@@ -9,7 +9,8 @@ router.use('/posts', require('./posts'));
 router.use('/comments', require('./comments'));
 router.use('/api', require('./api'));
 router.use('/likes', require('./likes'));
-
+// CHANGE: This is the route for dashboard, corresponding action homeController.dashboard is provided
+router.use('/dashboard',passport.checkAuthentication, homeController.dashboard);
 
 //for any further routes, access from here
 // router.use('/routerName', require('./routerfile'));

@@ -1,13 +1,21 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 const Like = require('../models/like');
+const User = require('../models/user');
 
+
+// this is the action to create a post
 module.exports.create = async function(req, res){
     try{
+        let user = await User.findById(req.body.user);
         let post = await Post.create({
+
             content: req.body.content,
             user: req.user._id
         });
+
+        user.posts.push(post);
+        user.save();
         
         if (req.xhr){
             // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
@@ -15,7 +23,8 @@ module.exports.create = async function(req, res){
 
             return res.status(200).json({
                 data: {
-                    post: post
+                    post: post,
+                    user: user
                 },
                 message: "Post created!"
             });
@@ -33,24 +42,28 @@ module.exports.create = async function(req, res){
   
 }
 
-
+// This is the action for deleting a post
 module.exports.destroy = async function(req, res){
 
     try{
         let post = await Post.findById(req.params.id);
+        
 
         if (post.user == req.user.id){
 
-            // CHANGE :: delete the associated likes for the post and all its comments' likes too
+            // delete the associated likes for the post and all its comments' likes too
             await Like.deleteMany({likeable: post, onModel: 'Post'});
             await Like.deleteMany({_id: {$in: post.comments}});
-
-
 
             post.remove();
 
             await Comment.deleteMany({post: req.params.id});
 
+            // get the user id so as to search in DB
+            let userId = post.user;
+
+            // find out the user in the DB and update its posts array(remove that post from DB)
+            await User.findByIdAndUpdate(userId, { $pull: {posts: req.params.id}});
 
             if (req.xhr){
                 return res.status(200).json({
@@ -74,4 +87,20 @@ module.exports.destroy = async function(req, res){
         return res.redirect('back');
     }
     
+}
+
+//CHANGE: This is the action for hiding a post from the feed
+module.exports.hide = async function(req, res){
+
+    try{
+        let post = await Post.findById(req.params.id);
+  
+        await Post.updateOne({_id: post._id},{$set: { isHidden: true } });
+        req.flash('success', 'Post is now hidden')
+        return res.redirect('/');
+    }
+    catch(err){
+        req.flash('error', 'You are not authorised to hide this post');
+        return res.redirect('/');
+    }
 }

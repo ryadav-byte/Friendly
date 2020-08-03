@@ -9,8 +9,14 @@ const postSchema = new mongoose.Schema({
         type:  mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+
+    //CHANGE: this field will help admin hide a post
+    isHidden:{
+        type: Boolean,
+        default: false
+    },
+
     // include the array of the ids of all comments in this post schema itself
-    
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,

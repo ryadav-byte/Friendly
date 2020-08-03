@@ -2,10 +2,7 @@
     <div id="post-author">
         <a href="/users/profile/<%= post.user._id %>">
             <div>
-                <img
-                    src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
-                    alt="Image"
-                />
+                <img src="<%=post.user.avatar%>" alt="<%=post.user.name%>">
                 <div>
                     <div>
                         <strong id="post-author-name">
@@ -23,31 +20,32 @@
                 </div>
             </div>
         </a>
-        <!-- <div>
-            <span class="fas fa-circle"></span>
-            <span class="fas fa-circle"></span>
-            <span class="fas fa-circle"></span>
-        </div> -->
+        
+        <div>
+            <!-- CHANGE: this will allow admin to hide a post -->
+            <% if(locals.user && locals.user.role == 'admin'){%>
+                <div>
+                    <a class="hide-post-button" href="/posts/hide/<%= post.id %>"><i class="far fa-eye-slash"></i></a>
+                </div>
+            <%}%>
+        </div>
+
         <div>
             <% if(locals.user && post.user.id == locals.user.id){%>
-            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="fas fa-trash"></i></a>
+                <div>
+                    <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="fas fa-trash"></i></a>
+                </div>
             <%}%>
         </div>
     </div>
+
     <div id="post-data">
         <p>
            <%= post.content %>
         </p>
     </div>
+    
     <div id="post-interactions">
-        <div id="interactions-amount">
-            <!-- <span
-                id="like-icon"
-                class="fas fa-thumbs-up fa-flip-horizontal"
-            ></span>
-           
-            <span id="amount-info" class="toggle-like-button" data-likes="<%= post.likes.length %>"><%= post.likes.length %> <span>&nbsp;·&nbsp;</span><%= post.comments.length %> Comments</span> -->
-        </div>
         <div id="interactions-btns">
             <button>
                 <a style="color: black;" href="#collapseExample<%= post._id%>" role="button" >
@@ -70,10 +68,6 @@
             </button>
         </div>
     </div>
-    <p>
-
-      </p>
-      <!-- <section class="post-comments"> -->
 
         <div class="collapse" id="collapseExample<%= post._id%>">
             <form id="post-<%= post._id %>-comments-form" class="form-row" action="comments/create" method="POST">
@@ -88,7 +82,6 @@
             
                 
                 <div id="post-comments-<%= post._id %>" class="post-comments rounded-0 card card-body .bg-secondary" style=" border: none;">
-                    <!-- <article> -->
                         <% for(comment of post.comments ){ %>
                         <section id="comment-<%= comment._id %>">
                         <div id="single-comment" style="border: 1px solid slategrey;  border-radius:0px 25px 25px 25px;;
@@ -97,26 +90,15 @@
                         <div id="post-author" > 
                             <a href="#">
                                 <div>
-                                    <!-- <img
-                                        src="https://content.techgig.com/photo/75755485/Are-you-a-programmer-You-can-make-money-with-these-12-ideas-instantly.jpg"
-                                        alt="Image"
-                                    /> -->
                                     <div>
                                         <div>
                                             <strong id="post-author-name">
                                                 <%= comment.user.name %>
-                                            </strong
-                                            >
-                                            <!-- <span>
-                                                <span>&nbsp;·&nbsp;</span>
-                                                1st</span
-                                            > -->
+                                            </strong>
                                         </div>
-                                        <span> Software Engineer</span
-                                        >
+                                        <span> Software Engineer</span>
                                         <span></span>
                                     </div>
-                                    
                                 </div>
                                 <div>
                                     <% if(locals.user && comment.user.id == locals.user.id){%>
@@ -124,18 +106,14 @@
                                     <%}%>
                                 </div>
                             </a>
-                           
                         </div> 
-                    <!-- </article> -->
                     <div style="padding: 14px 14px 0;">
                         <%= comment.content%>
                     </div>
-                    
                 </div>
                 </section>
                     <%}%>
                 </div>
-           
           </div>
-        <!-- </section> -->
     </article>
+

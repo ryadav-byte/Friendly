@@ -293,7 +293,7 @@ main#main-section div#feed-sort button span.fas {
     padding: 0 2px;
 }
 /**************************************************************************
-    main container > main section > FEED POSTS
+    main container > main section > FEED POSTS(IN HOME PAGE)
 **************************************************************************/
 
 main#main-section article {
@@ -534,7 +534,7 @@ main#main-section
     font-size: 18px;
 }
 /***************************************************************************
-    container > CONTAINER MEDIA QUERY
+    container > CONTAINER MEDIA QUERY(IN HOME PAGE)
 /**************************************************************************/
 
 @media only screen and (max-width: 1180px) {
@@ -630,7 +630,6 @@ main#main-section
 }
 
 .font-16 {
-    // font-size: 16px !important;
     font-size: 16px;
 }
 

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const multer  = require('multer')
 const path = require('path');
 const AVATAR_PATH = path.join('/uploads/users/avatars')
@@ -14,16 +13,27 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        // select:false
     },
-    // password: {type: String,default: null,select:false},
+    role: {
+        type: String,
+        default: "user",
+        enum: ["user", "admin"]
+      },
     name:{
         type: String,
         required: true
     },
     avatar:{
         type: String
-    }
+    },
+     //CHANGE: include an array of all the posts(ids will be stored) in the user schema itself. This field will make searching fast in the DB
+    posts: [
+      {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Post'
+      }
+  ]
+
 },{
     timestamps: true
 });
@@ -39,7 +49,6 @@ let storage = multer.diskStorage({
   });
 
 // static methods
-
 userSchema.statics.uploadedAvatar = multer({storage : storage}).single('avatar');
 userSchema.statics.avatarPath = AVATAR_PATH;
    

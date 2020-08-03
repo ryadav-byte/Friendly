@@ -71,12 +71,12 @@
                 <span class="fas fa-circle"></span>
             </div> -->
             <div>
-                
-                <a class="delete-post-button" href="/posts/destroy/${post._id}"><i class="fas fa-trash"></i></a>
-                
-                
+                <div>
+                    <a class="delete-post-button" href="/posts/destroy/${post._id}"><i class="fas fa-trash"></i></a>
+                </div>  
             </div>
         </div>
+
         <div id="post-data">
             <p>
             ${post.content}
@@ -151,7 +151,7 @@
     }
 
 
-     // loop over all the existing posts on the page (when the window loads for the first time) and call the delete post method on delete link of each, also add AJAX (using the class we've created) to the delete button of each
+     // loop over all the existing posts on the page (when the window loads for the first time) and call the delete post method on delete link of each, also add AJAX (using the class created) to the delete button of each
      let convertPostsToAjax = function(){
         $('#posts-list-container>article').each(function(){
             let self = $(this);
@@ -163,8 +163,6 @@
             new PostComments(postId);
         });
     }
-
-
 
     createPost();
     convertPostsToAjax();

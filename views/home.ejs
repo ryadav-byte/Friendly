@@ -15,14 +15,19 @@
                     <div id="background"></div>
                     <div id="profile-info">
                         <img
-                            src="/images/me.jpg"
+                            src="<%= user.avatar%>"
                             alt="Profile picture"
                         />
                         <strong id="profile-name">
                             <%= user.name%>
                         </strong
                         >
-                        <small>Full Stack Developer</small>
+                        <% if(user.role == 'user') {%>
+                        <small>Software Engineer</small>
+                        <% }else { %>
+                        <!-- CHANGE: Bio of admin can be customised as per the instructions -->
+                        <small>You have some superpowers</small>
+                        <% } %>
                     </div>
                 </div>
                 
@@ -34,13 +39,16 @@
     <section id="feed-posts">
         <div id="main-wrapper">
             <main id="main-section">
+
+            <!-- CHANGE: only user will post -->
+                <% if(user.role == 'user') {%>
                 <div class="card gedf-card">
-                
                     <form action="/posts/create" id="new-post-form" method="POST">
                         <div class="card-body">
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                     <div class="form-group">
+                                        <input type="hidden" name="user" value="<%= user._id%>">
                                         <textarea name="content" class="form-control" id="message" rows="3" placeholder="What are you thinking?" required></textarea>
                                     </div>
     
@@ -55,22 +63,32 @@
                     </form>
 
                 </div>
+                <% } %>
+
+            <!-- CHANGE: only user will see this icon -->
+                <% if(user.role == 'user') {%>
                 <div id="feed-sort">
                     <hr />
                     <button>
-                        <!-- <span>Sort by:</span> -->
                         <span>Feed</span>
                         <span class="fas fa-sort-down"></span>
                     </button>
                 </div>
+                <% } %>
 
                 <div id="posts-list-container">
                  
-                        <% for(post of posts){ %>
+                    <% for(post of posts){ %>
+
+                        <!-- CHANGE: only those posts will be visible on the home page which are not hidden -->
+
+                        <% if(post.isHidden == false){ %>
 
                             <%- include('_post') -%>
-                            
+
                         <% } %>
+
+                    <% } %>
                     
                 </div>
                
@@ -85,7 +103,13 @@
             <h5> User List</h5>
            
             <% for(u of all_users){ %>
-            <p><a href="users/profile/<%= u.id%>"><%= u.name %></a></p>
+            <!--CHANGE: The list will only show users not admins -->
+                <% if(u.role == 'user'){ %>
+                
+                    <p><a href="users/profile/<%= u.id%>"><%= u.name %></a></p>
+
+                <% } %>
+
             <% } %>
         </div>
 

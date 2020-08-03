@@ -23,6 +23,7 @@ chatServer.listen(5000);
 console.log("chat server is listening on port 5000");
 
 
+// to compile scss files into css files
 app.use(sassMiddleware({
     /* Options */
     src: './assets/scss',
@@ -41,6 +42,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
+
+// app should look for assets folder for static files
 app.use(express.static('./assets'));
 
 // make the uploads path available to the browser
@@ -66,26 +69,35 @@ app.use(session({
     cookie:{
         maxAge: (1000 * 60 * 100)
     },
+    // cookie will be stored in DB
     store: new MongoStore(
     {
         mongooseConnection: db,
         autoRemove: 'disabled'
     },
     function(err){
-        console.log(err || 'connect-mongodb setup is ok');
+        console.log(err, 'connect-mongodb setup is ok');
     }
     )
 }));
 
+
+// asking app to use passport for authentication
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
+
+// app will show the notification using custom middleware
 app.use(flash());
 app.use(customMware.setFlash);
+
+
 //use express router
 app.use('/', require('./routes/index'));
 
+
+// app will be running on the given port number
 app.listen(port, function(err){
     if(err){
         console.log(`Error in running the server ${err}`);

@@ -1,7 +1,6 @@
 const passport = require('passport');
-
+const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
-
 const User = require('../models/user');
 
 
@@ -18,7 +17,11 @@ passport.use(new LocalStrategy({
                 return done(err);
             }
 
-            if (!user || user.password != password){
+        // CHANGE: compare the hashed password (stored in the database) with the password of req.user. 
+        // If both match then isMatch will be true else false
+            let isMatch = bcrypt.compareSync(req.body.password, user.password);
+
+            if (!user || !isMatch){
                 req.flash('error', 'Invalid Username/Password');
                 return done(null, false);
             }

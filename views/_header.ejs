@@ -12,6 +12,13 @@
         <div class="auth-links">
             <ul>
                 <% if (locals.user){ %>
+                
+                <!-- CHANGE: Show the link for Dashboard only if the role is admin -->
+                <% if (locals.user.role == 'admin'){ %>
+                    <li>
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                <% } %>
                 <li>
                     <a href="/users/profile/<%= locals.user.id%>"><%= user.name %></a>
                 </li>

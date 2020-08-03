@@ -1,9 +1,7 @@
-@charset "UTF-8";
 body {
   margin: 0;
   background: #f5f5f5;
   font-family: "Source Sans Pro", sans-serif;
-  /* propriedades para a fonte ficar mais legível */
   box-sizing: border-box; }
   body #layout-main {
     height: 100%;

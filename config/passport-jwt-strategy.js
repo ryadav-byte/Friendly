@@ -9,8 +9,6 @@ jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
 secretOrKey: 'friendly'
 }
 
-
-
 passport.use(new JWTStrategy(opts, function(jwtPayLoad, done){
 
     User.findById(jwtPayLoad._id, function(err, user){
