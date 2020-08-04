@@ -22,7 +22,6 @@ const chatSockets=require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log("chat server is listening on port 5000");
 
-
 // to compile scss files into css files
 app.use(sassMiddleware({
     /* Options */
@@ -42,7 +41,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-
 // app should look for assets folder for static files
 app.use(express.static('./assets'));
 
@@ -54,11 +52,9 @@ app.use(expressLayouts);
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
-
 //set up the view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
-
 
 app.use(session({
     name: 'Friendly',
@@ -81,21 +77,17 @@ app.use(session({
     )
 }));
 
-
 // asking app to use passport for authentication
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
-
 // app will show the notification using custom middleware
 app.use(flash());
 app.use(customMware.setFlash);
 
-
 //use express router
 app.use('/', require('./routes/index'));
-
 
 // app will be running on the given port number
 app.listen(port, function(err){
