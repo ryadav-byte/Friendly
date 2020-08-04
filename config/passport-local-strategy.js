@@ -17,19 +17,23 @@ passport.use(new LocalStrategy({
                 return done(err);
             }
 
-        // CHANGE: compare the hashed password (stored in the database) with the password of req.user. 
-        // If both match then isMatch will be true else false
-            let isMatch = bcrypt.compareSync(req.body.password, user.password);
-
-            if (!user || !isMatch){
+            if (!user){
                 req.flash('error', 'Invalid Username/Password');
                 return done(null, false);
             }
 
+        // CHANGE: compare the hashed password (stored in the database) with the password of req.user. 
+        // If both match then isMatch will be true else false
+        let isMatch = bcrypt.compareSync(req.body.password, user.password);
+
+        if (!isMatch){
+            req.flash('error', 'Invalid Username/Password');
+            return done(null, false);
+        }
+
             return done(null, user);
         });
     }
-
 
 ));
 
