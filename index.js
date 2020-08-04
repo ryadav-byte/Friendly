@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
-const port = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 
@@ -20,7 +20,7 @@ const customMware = require('./config/middleware');
 const chatServer=require('http').Server(app);
 const chatSockets=require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
-console.log("chat server is listening on port 5000");
+console.log("chat server is listening on PORT 5000");
 
 // to compile scss files into css files
 app.use(sassMiddleware({
@@ -90,10 +90,10 @@ app.use(customMware.setFlash);
 app.use('/', require('./routes/index'));
 
 // app will be running on the given port number
-app.listen(port, function(err){
+app.listen(PORT, function(err){
     if(err){
         console.log(`Error in running the server ${err}`);
         return;
     }
-    console.log(`Server is running on port: ${port}`);
+    console.log(`Server is running on port: ${PORT}`);
 });
